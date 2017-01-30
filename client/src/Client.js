@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 function search(query, cb) {
   return fetch(`api/food?q=${query}`, {
     accept: 'application/json',
@@ -14,7 +13,7 @@ function checkStatus(response) {
     const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
-    console.log(error); // eslint-disable-line no-console
+    console.log(error);
     throw error;
   }
 }
