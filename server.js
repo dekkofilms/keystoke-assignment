@@ -75,6 +75,39 @@ app.post('/api/dashboard', (req, res) => {
 
 });
 
+app.post('/api/login', (req, res) => {
+
+  User.find({username: req.body.username}, function (err, user) {
+
+    if (user.length === 0) {
+
+      console.log('no user');
+
+    } else {
+
+      let password = user[0].password
+
+      console.log(req.body.password, password);
+
+      bcrypt.compare(req.body.password, password, function (err, response) {
+
+        if (response) {
+
+          res.json({user: user});
+
+        } else {
+
+          console.log('try again');
+
+        }
+
+      });
+
+    }
+  });
+
+});
+
 app.post('/api/signup', upload.single('image'), (req, res) => {
 
   User.find({username: req.body.username}, function (err, user) {
@@ -97,9 +130,6 @@ app.post('/api/signup', upload.single('image'), (req, res) => {
           });
 
           user.save();
-          console.log('success!');
-
-          req.session.user = user;
 
           res.json({user: user});
         });

@@ -1,13 +1,23 @@
 import React from 'react';
-
-import { Link } from 'react-router'
-
-// import Match from 'react-router';
+import { Link } from 'react-router';
+import axios from 'axios';
 
 const Login = React.createClass({
   onFormSubmit: function () {
     console.log(this.refs.username.value);
     console.log(this.refs.password.value);
+
+    axios.post('/api/login',
+      {
+        username: this.refs.username.value,
+        password: this.refs.password.value
+      }).then(function (response) {
+
+        window.localStorage.setItem('user', JSON.stringify(response.data.user));
+
+        window.location.href = '#/dashboard'
+
+      })
   },
   render: function () {
     return (

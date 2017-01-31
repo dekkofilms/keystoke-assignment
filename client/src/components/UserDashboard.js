@@ -1,7 +1,5 @@
 import React from 'react';
 
-import axios from 'axios';
-
 const UserDashboard = React.createClass({
   getInitialState: function () {
     return {
@@ -15,9 +13,14 @@ const UserDashboard = React.createClass({
     const userFromStorage = window.localStorage.getItem('user');
     const user = JSON.parse(userFromStorage);
 
-    axios.post('/api/dashboard', {id: user._id}).then((user) => {
-      this.setState({user: user.data.user[0]});
-    });
+    if (!user) {
+
+      window.location.href = '#/login'
+      return
+      
+    }
+
+    this.setState({user: user[0]})
 
   },
   render: function () {

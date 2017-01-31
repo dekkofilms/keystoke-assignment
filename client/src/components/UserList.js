@@ -27,9 +27,7 @@ const UserList = React.createClass({
         />
       )
     });
-
-
-
+    
     return (
       <div>
         <h1>User List</h1>
