@@ -1,26 +1,23 @@
-function search(query, cb) {
-  return fetch(`api/food?q=${query}`, {
-    accept: 'application/json',
-  }).then(checkStatus)
-    .then(parseJSON)
-    .then(cb);
+const axios = require('axios');
+
+function getUsers() {
+  return axios.get('/api/users').then((response) => {
+    console.log(response);
+    return response.data;
+  });
 }
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    const error = new Error(`HTTP Error ${response.statusText}`);
-    error.status = response.statusText;
-    error.response = response;
+function signupUser(username, password) {
+  console.log(username, password);
+  axios.post('/api/signup', {
+    username: username, password: password
+  }).then(function (response) {
+    // console.log(response.data.user);
+    return response.data.user
+  }).catch(function (error) {
     console.log(error);
-    throw error;
-  }
+  })
 }
 
-function parseJSON(response) {
-  return response.json();
-}
-
-const Client = { search };
+const Client = { getUsers, signupUser };
 export default Client;

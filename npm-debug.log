@@ -10,7 +10,7 @@
 6 silly lifecycle lookup-server@0.0.1~preserver: no script for preserver, continuing
 7 info lifecycle lookup-server@0.0.1~server: lookup-server@0.0.1
 8 verbose lifecycle lookup-server@0.0.1~server: unsafe-perm in lifecycle true
-9 verbose lifecycle lookup-server@0.0.1~server: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/taylorking/galvanize/keystoke-assignment/node_modules/.bin:/usr/local/Cellar/node/7.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+9 verbose lifecycle lookup-server@0.0.1~server: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/taylorking/galvanize/keystoke-assignment/node_modules/.bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/taylorking/galvanize/keystoke-assignment/node_modules/.bin:/usr/local/Cellar/node/7.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle lookup-server@0.0.1~server: CWD: /Users/taylorking/galvanize/keystoke-assignment
 11 silly lifecycle lookup-server@0.0.1~server: Args: [ '-c', 'babel-node server.js' ]
 12 silly lifecycle lookup-server@0.0.1~server: Returned: code: 1  signal: null
