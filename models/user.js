@@ -7,7 +7,7 @@ const userSchema = new Schema({
   firstname: String,
   lastname: String,
   description: String,
-  picture: Buffer,
+  picture: String,
   created_at: Date,
   updated_at: Date
 });

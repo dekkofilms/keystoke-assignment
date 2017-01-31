@@ -8,24 +8,34 @@ import axios from 'axios';
 
 const Signup = React.createClass({
   onFormSubmit: function () {
-    // Client.signupUser(this.refs.username.value, this.refs.password.value)
 
-    axios.post('/api/signup', {
-      username: this.refs.username.value, password: this.refs.password.value
+    let data = new FormData();
+
+    data.append('username', this.refs.username.value)
+    data.append('password', this.refs.password.value)
+    data.append('firstname', this.refs.firstname.value)
+    data.append('lastname', this.refs.lastname.value)
+    data.append('image', this.refs.image.files[0])
+    data.append('description', this.refs.description.value)
+
+    axios.post('/api/signup', data, {
+      'Content-Type' : 'multipart/form-data'
     }).then(function (response) {
-      console.log(response.data.user);
 
       window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      window.location.href = '/'
+      window.location.href = '#/dashboard'
 
     }).catch(function (error) {
+
       console.log(error);
+
     })
 
   },
   render: function () {
     return (
+
       <div className="ui middle aligned center aligned grid">
         <div className="eight wide column">
           <h2 className="ui teal image header">
@@ -34,7 +44,7 @@ const Signup = React.createClass({
             </div>
           </h2>
 
-          <form className="ui large form">
+          <form className="ui large form" encType="multipart/form-data">
             <div className="ui stacked segment">
               <div className="field">
                 <div className="ui left icon input">
@@ -48,6 +58,26 @@ const Signup = React.createClass({
                   <input type="password" name="password" ref="password" placeholder="Password"/>
                 </div>
               </div>
+              <div className="field">
+                <div className="ui left icon input">
+                  <i className="quote left icon"></i>
+                  <input type="text" name="firstname" ref="firstname" placeholder="First name"/>
+                </div>
+              </div>
+              <div className="field">
+                <div className="ui left icon input">
+                  <i className="quote left icon"></i>
+                  <input type="text" name="lastname" ref="lastname" placeholder="Last name"/>
+                </div>
+              </div>
+              <div className="field">
+                <div className="ui center icon input">
+                  <input type="file" name="image" ref="image"/>
+                </div>
+              </div>
+              <div className="field">
+                <textarea rows="2" name="description" ref="description" placeholder="Description"></textarea>
+              </div>
               <div className="ui fluid large teal submit button" onClick={this.onFormSubmit}>Signup</div>
             </div>
           </form>
@@ -57,6 +87,7 @@ const Signup = React.createClass({
           </div>
         </div>
       </div>
+
     );
   },
 });

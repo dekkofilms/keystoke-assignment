@@ -4,7 +4,19 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 
+const cloudinary = require('cloudinary');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' })
+
 const app = express();
+
+require('dotenv').config()
+
+cloudinary.config({
+  cloud_name: 'dvutqs7zs',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 app.set('port', (process.env.PORT || 3001));
 
@@ -44,28 +56,56 @@ app.get('/api/users', (req, res) => {
       console.log(err);
     } else {
       console.log(users);
+      res.json({users: users});
     }
   });
 
 });
 
-app.post('/api/signup', (req, res) => {
-  console.log(req.body);
+app.post('/api/dashboard', (req, res) => {
+
+  User.find({_id: req.body.id}, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(user);
+      res.json({user: user});
+    }
+  });
+
+});
+
+app.post('/api/signup', upload.single('image'), (req, res) => {
+
   User.find({username: req.body.username}, function (err, user) {
+
+    //checking if user is existing already
     if (user.length === 0) {
-      bcrypt.hash(req.body.password, 10, function(err, hashed_pw) {
-        var user = new User({
-          username: req.body.username,
-          password: hashed_pw
+
+      //sending image off to cloudinary
+      cloudinary.uploader.upload(req.file.path, function (result) {
+        console.log(result)
+
+        bcrypt.hash(req.body.password, 10, function(err, hashed_pw) {
+          var user = new User({
+            username: req.body.username,
+            password: hashed_pw,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            picture: result.url,
+            description: req.body.description
+          });
+
+          user.save();
+          console.log('success!');
+
+          req.session.user = user;
+
+          res.json({user: user});
         });
 
-        user.save();
-        console.log('success!');
-
-        req.session.user = user;
-
-        res.json({user: user});
       });
+
     } else {
       console.log('user exists');
     }

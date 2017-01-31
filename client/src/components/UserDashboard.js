@@ -1,8 +1,6 @@
 import React from 'react';
 
-// import { Link } from 'react-router';
-
-import Client from '../Client';
+import axios from 'axios';
 
 const UserDashboard = React.createClass({
   getInitialState: function () {
@@ -11,20 +9,37 @@ const UserDashboard = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.loadUsersFromServer();
-    // setInterval(this.loadUsersFromServer, 5000);
+    this.loadUserFromStorage();
   },
-  loadUsersFromServer: function () {
-    Client.getUsers((response) => {
-      console.log(response);
-      this.setState({users: response});
+  loadUserFromStorage: function () {
+    const userFromStorage = window.localStorage.getItem('user');
+    const user = JSON.parse(userFromStorage);
+
+    axios.post('/api/dashboard', {id: user._id}).then((user) => {
+      this.setState({user: user.data.user[0]});
     });
+
   },
   render: function () {
-    return (
-      <div>
+    console.log(this.state.user);
 
-        <h1>Dashboard</h1>
+    return (
+      <div className="ui padded grid">
+
+        <div className="row">
+          <div className="four wide column">
+            <h1>My Dashboard</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="four wide column">
+            <img className="ui medium image" alt="profile" src={this.state.user.picture}/>
+          </div>
+          <div className="twelve wide column">
+            <h3>{this.state.user.firstname} {this.state.user.lastname}</h3>
+            <p>{this.state.user.description}</p>
+          </div>
+        </div>
 
       </div>
     );
