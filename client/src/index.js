@@ -9,7 +9,7 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import UserList from './components/UserList';
-import UserDashboard from './components/UserDashboard';
+import EditableUserDashboard from './components/UserDashboard';
 import VisitingUser from './components/VisitingUser';
 
 import './index.css';
@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route path='/users' component={UserList}>
         <Route path='/users/:id' component={VisitingUser}/>
       </Route>
-      <Route path='/dashboard' component={UserDashboard}/>
+      <Route path='/dashboard' component={EditableUserDashboard}/>
     </Route>
   </Router>,
   document.getElementById('root')

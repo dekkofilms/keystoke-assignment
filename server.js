@@ -94,6 +94,29 @@ app.patch('/api/user', (req, res) => {
 
 });
 
+app.patch('/api/userphoto', upload.single('image'), (req, res) => {
+
+  cloudinary.uploader.upload(req.file.path, function (result) {
+    console.log(result)
+
+    User.findOneAndUpdate({_id: req.body.id}, {$set: {picture: result.url}}, {new: true}, function (err, user) {
+      if (err) {
+
+        console.log(err);
+
+      } else {
+
+        console.log(user);
+        res.json({user: user});
+        
+      }
+    });
+
+  });
+
+
+});
+
 app.post('/api/dashboard', (req, res) => {
 
   User.find({_id: req.body.id}, function (err, user) {

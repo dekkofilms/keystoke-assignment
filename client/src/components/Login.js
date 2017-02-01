@@ -48,7 +48,7 @@ const Login = React.createClass({
           </form>
 
           <div className="ui message">
-            New to us? <Link to="/signup">Sign Up</Link>
+            New? <Link to="/signup">Sign Up</Link>
           </div>
         </div>
       </div>
