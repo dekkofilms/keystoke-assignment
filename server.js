@@ -1,8 +1,12 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
+
+require('dotenv').config()
+
+const mongoose = require('mongoose');
+const uri = 'mongodb://dekkofilms:' + process.env.PASSWORD + '@ds139949.mlab.com:39949/keystoke'
 
 const cloudinary = require('cloudinary');
 const multer = require('multer');
@@ -10,7 +14,6 @@ const upload = multer({ dest: 'uploads/' })
 
 const app = express();
 
-require('dotenv').config()
 
 cloudinary.config({
   cloud_name: 'dvutqs7zs',
@@ -35,7 +38,7 @@ app.use(cookieSession({
     keys: ['key1', 'key2']
 }));
 
-mongoose.connect('mongodb://localhost/keystoke');
+mongoose.connect(uri);
 
 const db = mongoose.connection;
 
@@ -48,8 +51,6 @@ db.once('open', function () {
 const User = require('./models/user');
 
 app.get('/api/users', (req, res) => {
-  // console.log('hit server');
-  // res.json({boom: 'booyah', diggity: 'booyah'});
 
   User.find({}, function (err, users) {
     if (err) {
@@ -93,7 +94,7 @@ app.post('/api/login', (req, res) => {
 
         if (response) {
 
-          res.json({user: user});
+          res.json({user: user[0]});
 
         } else {
 

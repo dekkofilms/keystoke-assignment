@@ -15,7 +15,7 @@ const NavBar = React.createClass({
     const user = JSON.parse(userFromStorage);
 
     if (user) {
-      this.setState({user: user[0]})
+      this.setState({user: user})
       window.location.href = '#/dashboard'
     } else {
       window.location.href = '#/login'

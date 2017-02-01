@@ -17,10 +17,10 @@ const UserDashboard = React.createClass({
 
       window.location.href = '#/login'
       return
-      
+
     }
 
-    this.setState({user: user[0]})
+    this.setState({user: user})
 
   },
   render: function () {
