@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import UserList from './components/UserList';
 import UserDashboard from './components/UserDashboard';
+import VisitingUser from './components/VisitingUser';
 
 import './index.css';
 import './semantic-ui/semantic.min.css';
@@ -19,7 +20,9 @@ ReactDOM.render(
     <Route path='/' component={NavBar}>
       <Route path='/login' component={Login}/>
       <Route path='/signup' component={Signup}/>
-      <Route path='/users(/:id)' component={UserList}/>
+      <Route path='/users' component={UserList}>
+        <Route path='/users/:id' component={VisitingUser}/>
+      </Route>
       <Route path='/dashboard' component={UserDashboard}/>
     </Route>
   </Router>,

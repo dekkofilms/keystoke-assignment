@@ -67,6 +67,19 @@ app.get('/api/users', (req, res) => {
 
 });
 
+app.post('/api/getuser', (req, res) => {
+
+  User.find({_id: req.body.id}, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(user);
+      res.json({users: user[0]});
+    }
+  });
+
+});
+
 app.patch('/api/user', (req, res) => {
 
   User.findOneAndUpdate({_id: req.body.id}, {$set: {firstname: req.body.firstname, lastname: req.body.lastname, description: req.body.description}}, {new: true}, function (err, user) {

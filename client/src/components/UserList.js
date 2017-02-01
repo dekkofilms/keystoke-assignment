@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import User from './User';
+import VisitingUser from './VisitingUser';
 
 const UserList = React.createClass({
   getInitialState: function () {
     return {
-      users: []
+      users: [],
     }
   },
   componentDidMount: function () {
@@ -28,20 +29,41 @@ const UserList = React.createClass({
       )
     });
 
-    console.log("params: " + JSON.stringify(this.props.params));
+    console.log(this.props.params.id);
 
-    return (
-      <div>
-        <div className="ui three column padded grid">
-          <div className="row">
-            <div className="sixteen wide column">
-              <h1>User List</h1>
+    if (this.props.params.id === undefined) {
+      return (
+        <div>
+          <div className="ui three column padded grid">
+            <div className="row">
+              <div className="sixteen wide column">
+                <h1>User List</h1>
+              </div>
             </div>
+            {users}
           </div>
-          {users}
         </div>
-      </div>
-    );
+      );
+    } else {
+
+      const visituser = this.state.users.filter((user) => {
+        console.log('visit: ' + user);
+        return user._id === this.props.params.id;
+      });
+
+      console.log(visituser);
+
+      return (
+        <VisitingUser
+          picture={visituser[0].picture}
+          firstname={visituser[0].firstname}
+          lastname={visituser[0].lastname}
+          description={visituser[0].description}
+        />
+      );
+
+    }
+
   },
 });
 
