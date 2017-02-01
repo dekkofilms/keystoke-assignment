@@ -2,4 +2,4 @@
 
 ### Created by Taylor King
 
-Deployed link at: [link](https://keystoke.herokuapp.com "App")
+Deployed link: [Click me!](https://keystoke.herokuapp.com "App")
