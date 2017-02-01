@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 
-// require('dotenv').config()
+if (process.env.NODE_ENV != 'production') {
+  require('dotenv').config();
+}
 
 const mongoose = require('mongoose');
 const uri = 'mongodb://dekkofilms:' + process.env.PASSWORD + '@ds139949.mlab.com:39949/keystoke'
