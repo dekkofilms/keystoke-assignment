@@ -40,6 +40,8 @@ app.use(cookieSession({
     keys: ['key1', 'key2']
 }));
 
+mongoose.Promise = global.Promise;
+
 mongoose.connect(uri);
 
 const db = mongoose.connection;
@@ -60,6 +62,20 @@ app.get('/api/users', (req, res) => {
     } else {
       console.log(users);
       res.json({users: users});
+    }
+  });
+
+});
+
+app.patch('/api/user', (req, res) => {
+
+  User.findOneAndUpdate({_id: req.body.id}, {$set: {firstname: req.body.firstname, lastname: req.body.lastname, description: req.body.description}}, {new: true}, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+
+      console.log(user);
+      res.json({user: user});
     }
   });
 
