@@ -27,11 +27,17 @@ const UserList = React.createClass({
         />
       )
     });
-    
+
+    console.log("params: " + JSON.stringify(this.props.params));
+
     return (
       <div>
-        <h1>User List</h1>
         <div className="ui three column padded grid">
+          <div className="row">
+            <div className="sixteen wide column">
+              <h1>User List</h1>
+            </div>
+          </div>
           {users}
         </div>
       </div>

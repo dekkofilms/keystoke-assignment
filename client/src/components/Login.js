@@ -15,7 +15,7 @@ const Login = React.createClass({
 
         window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
-        window.location.href = '#/dashboard'
+        window.location.href = '/'
 
       })
   },

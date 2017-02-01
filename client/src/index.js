@@ -19,7 +19,7 @@ ReactDOM.render(
     <Route path='/' component={NavBar}>
       <Route path='/login' component={Login}/>
       <Route path='/signup' component={Signup}/>
-      <Route path='/users' component={UserList}/>
+      <Route path='/users(/:id)' component={UserList}/>
       <Route path='/dashboard' component={UserDashboard}/>
     </Route>
   </Router>,

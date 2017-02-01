@@ -7,7 +7,7 @@ const NavBar = React.createClass({
       user: []
     }
   },
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.loadUserFromStorage();
   },
   loadUserFromStorage: function () {
@@ -15,23 +15,29 @@ const NavBar = React.createClass({
     const user = JSON.parse(userFromStorage);
 
     if (user) {
-      window.location.href = '#/dashboard'
       this.setState({user: user[0]})
+      window.location.href = '#/dashboard'
     } else {
       window.location.href = '#/login'
+      return
     }
   },
   handleLogoutClick: function () {
-    localStorage.clear();
 
-    this.setState({user: null})
+    this.setState({user: []})
+    window.localStorage.clear();
+
+    window.location.href = '#/login'
+
   },
   render: function () {
 
     const user = this.state.user;
 
+    console.log(user);
+
     let button = null;
-    if (user) {
+    if (user.hasOwnProperty('_id')) {
       button = <LogoutButton onClick={this.handleLogoutClick}/>
     } else {
       button = <LoginButton/>
@@ -70,9 +76,9 @@ function LoginButton(props) {
 function LogoutButton(props) {
   return (
     <div className="right menu">
-      <div onClick={props.onClick}>
+      <Link className="ui item" onClick={props.onClick}>
         Logout
-      </div>
+      </Link>
     </div>
   )
 }

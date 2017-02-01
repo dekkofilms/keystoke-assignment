@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const User = React.createClass({
+
   render: function () {
+
     return (
       <div className="column">
         <div className="ui fluid card">
@@ -9,7 +12,9 @@ const User = React.createClass({
             <img className="ui small image" src={this.props.picture} alt="user"/>
           </div>
           <div className="content">
-            <a className="header">{this.props.username}</a>
+            <Link className="header" to={'/users/' + this.props.id}>
+              {this.props.username}
+            </Link>
           </div>
         </div>
       </div>
