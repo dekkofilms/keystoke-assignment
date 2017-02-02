@@ -1,13 +1,21 @@
 import React from 'react';
-
 import { Link } from 'react-router'
+import Spinner from 'react-spin';
 
-// import Client from '../Client';
 
 import axios from 'axios';
 
 const Signup = React.createClass({
+  getInitialState: function () {
+    return {
+      stopped: true
+    }
+  },
   onFormSubmit: function () {
+
+    var self = this
+
+    self.setState({stopped: false});
 
     let data = new FormData();
 
@@ -24,6 +32,8 @@ const Signup = React.createClass({
 
       window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
+      self.setState({stopped: false});
+
       window.location.href = '/'
 
     }).catch(function (error) {
@@ -34,6 +44,13 @@ const Signup = React.createClass({
 
   },
   render: function () {
+
+    var spinCfg = {
+      width: 12,
+      radius: 35,
+      color: '#000'
+    };
+
     return (
 
       <div className="ui middle aligned center aligned grid">
@@ -80,6 +97,7 @@ const Signup = React.createClass({
               </div>
               <div className="ui fluid large teal submit button" onClick={this.onFormSubmit}>Signup</div>
             </div>
+            <Spinner config={spinCfg} stopped={this.state.stopped}/>
           </form>
 
           <div className="ui message">

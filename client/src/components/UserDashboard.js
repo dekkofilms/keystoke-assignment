@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import Spinner from 'react-spin';
 
 import UserForm from './UserForm';
 
@@ -22,7 +23,8 @@ const EditableUserDashboard = React.createClass({
     return {
       user: [],
       editFormOpen: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      stopped: true
     }
   },
   componentDidMount: function () {
@@ -53,6 +55,8 @@ const EditableUserDashboard = React.createClass({
     data.append('id', this.state.user._id)
     data.append('image', this.refs.image.files[0])
 
+    this.setState({stopped: false});
+
     axios.patch('/api/userphoto', data, {
       'Content-Type': 'multipart/form-data'
     }).then(function (response) {
@@ -61,7 +65,7 @@ const EditableUserDashboard = React.createClass({
 
       window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      self.setState({ user: response.data.user, modalIsOpen: false });
+      self.setState({ user: response.data.user, modalIsOpen: false, stopped: true });
 
     }).catch(function (error) {
 
@@ -103,6 +107,14 @@ const EditableUserDashboard = React.createClass({
     console.log(this.state.user);
 
     if (this.state.editFormOpen) {
+
+      var spinCfg = {
+        width: 12,
+        radius: 35,
+        color: '#000'
+      };
+
+
       return (
         <UserForm
           id={this.state.user._id}
@@ -126,6 +138,7 @@ const EditableUserDashboard = React.createClass({
           <div className="row">
             <div className="four wide column">
               <img className="ui medium image" alt="profile" src={this.state.user.picture}/>
+              <br/>
               <button className="ui blue small button" onClick={this.openModal}>Change Photo</button>
             </div>
             <div className="twelve wide column">
@@ -149,8 +162,9 @@ const EditableUserDashboard = React.createClass({
             <div className="field">
               <div className="ui center icon input">
                 <input type="file" name="image" ref="image"/>
+                <Spinner config={spinCfg} stopped={this.state.stopped}/>
                 <button className="ui button" onClick={this.closeModal}>Cancel</button>
-                <button className="ui button" onClick={this.onModalSubmit}>Submit</button>
+                <button className="ui green button" onClick={this.onModalSubmit}>Submit</button>
               </div>
             </div>
 
@@ -161,13 +175,5 @@ const EditableUserDashboard = React.createClass({
     }
   },
 });
-
-// <form>
-//   <input />
-//   <button>tab navigation</button>
-//   <button>stays</button>
-//   <button>inside</button>
-//   <button>the modal</button>
-// </form>
 
 export default EditableUserDashboard;
