@@ -24,4 +24,9 @@ I think after reading a lot more about Flux/Redux I would have benefited from st
 
 ## Final Thoughts
 
-Looking over it, I am happy with what I've accomplished, especially with tackling many new things. It's hard to kind of put this down because I keep researching and reading more about React and MongoDB and this and that ... there is room for refactoring, and making this flow cleaner and more to design, but I love that this field is always changing and I'm eager to learn more and more. 
+Looking over it, I am happy with what I've accomplished, especially with tackling many new things. It's hard to kind of put this down because I keep researching and reading more about React and MongoDB and this and that ... there is room for refactoring, and making this flow cleaner and more to design, but I love that this field is always changing and I'm eager to learn more and more.
+
+## Instructions if you download or clone
+
+* npm install
+* npm start
