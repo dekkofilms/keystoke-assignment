@@ -60,7 +60,6 @@ app.get('/api/users', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(users);
       res.json({users: users});
     }
   });
@@ -73,7 +72,6 @@ app.post('/api/getuser', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(user);
       res.json({users: user[0]});
     }
   });
@@ -86,8 +84,6 @@ app.patch('/api/user', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-
-      console.log(user);
       res.json({user: user});
     }
   });
@@ -105,10 +101,7 @@ app.patch('/api/userphoto', upload.single('image'), (req, res) => {
         console.log(err);
 
       } else {
-
-        console.log(user);
         res.json({user: user});
-        
       }
     });
 
@@ -123,7 +116,6 @@ app.post('/api/dashboard', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(user);
       res.json({user: user});
     }
   });
@@ -141,8 +133,6 @@ app.post('/api/login', (req, res) => {
     } else {
 
       let password = user[0].password
-
-      console.log(req.body.password, password);
 
       bcrypt.compare(req.body.password, password, function (err, response) {
 
@@ -172,7 +162,6 @@ app.post('/api/signup', upload.single('image'), (req, res) => {
 
       //sending image off to cloudinary
       cloudinary.uploader.upload(req.file.path, function (result) {
-        console.log(result)
 
         bcrypt.hash(req.body.password, 10, function(err, hashed_pw) {
           var user = new User({
