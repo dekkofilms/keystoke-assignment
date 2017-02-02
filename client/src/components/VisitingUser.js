@@ -8,7 +8,7 @@ const VisitingUser = React.createClass({
       <div className="ui padded grid">
         <div className="row">
           <div className="four wide column">
-            <h1>My Dashboard</h1>
+            <h1>About</h1>
           </div>
         </div>
         <div className="row">
