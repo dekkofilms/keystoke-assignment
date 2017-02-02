@@ -61,8 +61,6 @@ const EditableUserDashboard = React.createClass({
       'Content-Type': 'multipart/form-data'
     }).then(function (response) {
 
-      console.log(response);
-
       window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
       self.setState({ user: response.data.user, modalIsOpen: false, stopped: true });
@@ -95,8 +93,6 @@ const EditableUserDashboard = React.createClass({
       description: attrs.description
     }).then((response) => {
 
-      console.log('db response:'+response.data);
-
       window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
       this.setState({ user: response.data.user, editFormOpen: false })
@@ -104,7 +100,6 @@ const EditableUserDashboard = React.createClass({
 
   },
   render: function () {
-    console.log(this.state.user);
 
     if (this.state.editFormOpen) {
 

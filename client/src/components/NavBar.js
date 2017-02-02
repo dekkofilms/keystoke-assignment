@@ -34,8 +34,6 @@ const NavBar = React.createClass({
 
     const user = this.state.user;
 
-    console.log(user);
-
     let button = null;
     if (user.hasOwnProperty('_id')) {
       button = <LogoutButton onClick={this.handleLogoutClick}/>

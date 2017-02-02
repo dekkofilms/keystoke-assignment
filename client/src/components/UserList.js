@@ -29,8 +29,6 @@ const UserList = React.createClass({
       )
     });
 
-    console.log(this.props.params.id);
-
     if (this.props.params.id === undefined) {
       return (
         <div>
@@ -47,11 +45,8 @@ const UserList = React.createClass({
     } else {
 
       const visituser = this.state.users.filter((user) => {
-        console.log('visit: ' + user);
         return user._id === this.props.params.id;
       });
-
-      console.log(visituser);
 
       return (
         <VisitingUser

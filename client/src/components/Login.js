@@ -4,8 +4,6 @@ import axios from 'axios';
 
 const Login = React.createClass({
   onFormSubmit: function () {
-    console.log(this.refs.username.value);
-    console.log(this.refs.password.value);
 
     axios.post('/api/login',
       {
