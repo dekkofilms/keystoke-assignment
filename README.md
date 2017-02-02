@@ -30,4 +30,5 @@ Looking over it, I am happy with what I've accomplished, especially with tacklin
 
 * npm install
 * cd client && npm install
+* cd ..
 * npm start
