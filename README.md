@@ -21,3 +21,7 @@ I really had to think and break down each individual element on the page into co
 Even though I didn't utilize it like I wish I had, this project had got me reading a lot into Flux/Redux. React is very one way with their data, and has a whole new design pattern outside of what I was familiar with like MVC. I want to continue to read more into this. Lots of new lingo and words used to describe this pattern, but again ... it started clicking more and more towards the end of this project.
 
 I think after reading a lot more about Flux/Redux I would have benefited from storing all the applications data (state) in a Store. I had kept the user in localStorage, and it is by no means secure, but I have some Auth flow in there.
+
+## Final Thoughts
+
+Looking over it, I am happy with what I've accomplished, especially with tackling many new things. It's hard to kind of put this down because I keep researching and reading more about React and MongoDB and this and that ... there is room for refactoring, and making this flow cleaner and more to design, but I love that this field is always changing and I'm eager to learn more and more. 
