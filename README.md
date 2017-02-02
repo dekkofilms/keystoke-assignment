@@ -29,4 +29,5 @@ Looking over it, I am happy with what I've accomplished, especially with tacklin
 ## Instructions if you download or clone
 
 * npm install
+* cd client && npm install
 * npm start
