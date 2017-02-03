@@ -16,7 +16,6 @@ const upload = multer({ dest: 'uploads/' })
 
 const app = express();
 
-
 cloudinary.config({
   cloud_name: 'dvutqs7zs',
   api_key: process.env.CLOUDINARY_API_KEY,
